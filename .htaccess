@@ -1,0 +1,51 @@
+ErrorDocument 404 /404.php
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+Rewriterule ^(.*)/(.*),(.*)/(.*),(.*)/(.*),(.*)/(.*),(.*)/$ $1.php?$2=$3&$4=$5&$6=$7&$8=$9 [L]
+Rewriterule ^(.*)/(.*),(.*)/(.*),(.*)/(.*),(.*)/$ $1.php?$2=$3&$4=$5&$6=$7 [L]
+Rewriterule ^(.*)/(.*),(.*)/(.*),(.*)/$ $1.php?$2=$3&$4=$5 [L]
+Rewriterule ^(.*)/(.*),(.*)/$ $1.php?$2=$3 [L]
+RewriteCond %{HTTPS} off 
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+Options +FollowSymLinks
+Options -MultiViews
+
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule (.*) $1.php [L]
+
+RewriteRule ^(cartera)/([^/]*)/?(.*) $1.php?pag=$2&p=$3 [L]
+RewriteRule ^s/(\w+)$ ./acortador/acorta2.php?short=$1
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors On
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 10000
+   php_value memory_limit 512M
+   php_value post_max_size 1024M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 1024M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 10000
+   php_value memory_limit 512M
+   php_value post_max_size 1024M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 1024M
+   php_flag zlib.output_compression On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
